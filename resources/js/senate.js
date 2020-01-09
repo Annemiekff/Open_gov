@@ -42,17 +42,17 @@ computed: {
 
   //select voor party    
   if(this.checked){
-    checkedresult = searchresult.filter(function (item) {
-    return this.checked.includes(item.party);
-    }, this);
+    checkedresult = searchresult.filter((item) => {
+      return this.checked.includes(item.party);
+    });
   }
   else checkedresult = searchresult
 
   //select voor state    
   if(this.state){
-    stateresult = checkedresult.filter(function (item) {
-    return this.state.includes(item.state);
-    }, this);
+    stateresult = checkedresult.filter((item) => {
+      return this.state.includes(item.state);
+    });
   }
   else stateresult = checkedresult
 
