@@ -23,12 +23,13 @@ const app = new Vue({
       .then((response) => {
         response.data.results[0].members.forEach((item) => {
           if(item.in_office){ //active members only, sorts out doubles
-            if(item.seniority.length === 1) {
-              item.numNum = '0' + item.seniority
-            }
-            else {
-              item.numNum = item.seniority
-            }
+            item.seniority = Number(item.seniority)
+            // if(item.seniority.length === 1) {
+            //   item.numNum = '0' + item.seniority
+            // }
+            // else {
+            //   item.numNum = item.seniority
+            // }
           this.members.push(item)//gives actual data
           } // closes active members
         })//closes response manitulations
