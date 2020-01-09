@@ -39,17 +39,8 @@ const app = new Vue({
                 //add numNum to members to sort seniority
                 .then((response) => {
                     response.data.results[0].members.forEach((item) => {
-                        if(item.in_office){
-                        if (item.seniority.length === 1) {
-                            item.numNum = '0' + item.seniority
-                        }
-                        else {
-                            item.numNum = item.seniority
-                        }
-
-                        if (!item.votes_with_party_pct) {
-                            item.votes_with_party_pct = 0
-                        }
+                        if(item.in_office){ //active members only, sorts out doubles
+                          item.seniority = Number(item.seniority) //Nummer van seniority
                         
                         item.party_votes = ((item.total_votes / 100) * item.votes_with_party_pct).toPrecision(3)
                         

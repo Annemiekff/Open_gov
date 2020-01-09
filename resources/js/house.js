@@ -15,22 +15,16 @@ const appHouse = new Vue({
       }
     },
     async mounted() {
-      //try get to make error in loading visible
-      try{ 
-        //get data async
-        response = await axios.get(url, {headers: {"X-Api-Key": apiKey}})
-        //add numnum to members for sorting seniority
+      try{      //try get to make error in loading visible
+        response = await axios.get(url, {headers: {"X-Api-Key": apiKey}})       //get data async
         .then((response) => {
           response.data.results[0].members.forEach((item) => {
-            if(item.in_office){  //active members only, sorts out doubles
-            if(item.seniority.length === 1) {
-              item.numNum = '0' + item.seniority
-            }
-            else item.numNum = item.seniority
-            this.members.push(item)
-            }
-          })
-        })
+            if(item.in_office){ //active members only, sorts out doubles
+              item.seniority = Number(item.seniority) //Nummer van seniority
+              this.members.push(item)//gives actual data
+            } // closes active members
+          })//closes response manitulations
+        })//closes then
       }
       catch(error){console.log(error)
           this.errored = true}
