@@ -1,0 +1,208 @@
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <title>USA Open Gov</title>
+
+    <!-- bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <!-- needed for bootstrap. Belangrijk eerst jQuery, dan Popper.js en dan Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous" defer></script>
+
+    <!-- link main JS to html -->
+    <!-- <script type="text/javascript" src="./resources/js/main.js" defer></script> -->
+    
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+
+    <!-- Vue-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+    <script type="text/javascript" src="./resources/js/senate.js" defer></script>
+
+    <!-- css -->
+    <link href="resources/css/style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <!-- navigation-->
+        <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: rgb(116, 161, 200)">
+            <a class="navbar-brand">
+                <img src="./resources/images/US_Flag.png" height="90px">
+                <span class="header">USA Open Government</span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item my-auto"><a href="./index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item dropdown my-auto">
+                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Congress 116
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item active" href="./congr_senate.html">Senate 116<span class="sr-only">(current)</span></a>
+                            <a class="dropdown-item" href="./congr_house.html">House 116</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown my-auto">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Attendance
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./att_senate.html">Senate attendance</a>
+                            <a class="dropdown-item" href="./att_house.html">House attendance</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown my-auto">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Loyalty
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./loyal_senate.html">Senate loyalty</a>
+                            <a class="dropdown-item" href="./loyal_house.html">House loyalty</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Congress 116 - Senators</h1>
+        <p>First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.</p>
+            <div id="app" class="container">
+                <section class="row" v-if="errored">
+                    <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+                </section>
+                <section v-else class="row">
+                    <div class="searchbar col-4">
+                        <input class="form-control" type="text" v-model="searchQuery" placeholder="Search Representative" />
+                    </div> 
+                    <div class="col-4">
+                        <input type="checkbox" id="D" value="D" v-model="checked" checked>
+                        <label for="D">Democrats</label>
+                        <input type="checkbox" id="R" value="R" v-model="checked" checked>
+                        <label for="R">Republicans</label>
+                        <input type="checkbox" id="ID" value="ID" v-model="checked" checked>
+                        <label for="ID">Independents</label>
+                    </div>
+                    <div class="col-4">
+                        <select v-model="state">
+                            <option value=""> All States</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District Of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                            <option value="AS">American Samoa</option>
+                            <option value="GU">Guam</option>
+                            <option value="MP">Northern Mariana Islands</option>
+                            <option value="PR">Puerto Rico</option>
+                            <option value="UM">United States Minor Outlying Islands</option>
+                            <option value="VI">Virgin Islands</option>
+                        </select>
+                    </div>
+                <table class="col-12">
+                    <thead>
+                        <th width=20% @click="sort('last_name')">Representative</th>
+                        <th width=12% @click="sort('party')">Party</th>
+                        <th width=12% @click="sort('state')">State</th>
+                        <th width=12% @click="sort('numNum')">Seniority</th>
+                        <th width=12% @click="sort('votes_with_party_pct')">Votes with party</th>
+                        <th width=12% @click="sort('votes_against_party_pct')">Votes against party</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="member in resultQuery">
+                            <td><a v-bind:href="member.url" target="new"  >{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</a></td>
+                            <td v-if="member.party === 'R'">Republican</td>
+                            <td v-else-if="member.party === 'D'">Democrat</td>
+                            <td v-else-if="member.party === 'ID'">Independent</td>
+                            <td v-else>Other</td>
+                            <td>{{ member.state }}</td>
+                            <td>{{ member.seniority }}</td>
+                            <td>{{ member.votes_with_party_pct }}%</td>
+                            <td>{{ member.votes_against_party_pct }}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
+    </main>
+    <footer class="d-flex justify-content-around fixed-bottom">
+            <img src="./resources/images/Seal_US_Senate.png" height="100px">
+            <img src="./resources/images/Seal_US_House.png" height="100px">
+    </footer>
+</body>
+</html>
+
+
+<!-- basics working table with search and sort name button
+    
+                <table>
+                    <thead>
+                        <th width=12% @click="sort('last_name')">Senator</th>
+                        <th width=12% @click="sort('party')">Party</th>
+                        <th width=12% @click="sort('state')">State</th>
+                        <th width=12% @click="sort('seniority')">Seniority</th>
+                        <th width=12% @click="sort('votes_with_party_pct')">Votes with party</th>
+                        <th width=12% @click="sort('votes_against_party_pct')">Votes against party</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="member in resultQuery">
+                            <td><a v-bind:href="member.url" target="new"  >{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</a></td>
+                            <td v-if="member.party === 'R'">Republican</td>
+                            <td v-else-if="member.party === 'D'">Democrat</td>
+                            <td v-else-if="member.party === 'ID'">Independent</td>
+                            <td v-else>Other</td>
+                            <td>{{ member.state }}</td>
+                            <td>{{ member.seniority }}</td>
+                            <td>{{ member.votes_with_party_pct }}%</td>
+                            <td>{{ member.votes_against_party_pct }}%</td>
+                        </tr>
+                    </tbody>
+                </table> -->

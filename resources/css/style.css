@@ -1,0 +1,130 @@
+* {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    }
+
+html {
+    box-sizing: border-box;
+    }
+
+/* header + navbar */
+
+header {
+    width: 100%;
+    position: fixed;
+    height: 120px;
+    z-index: 1;
+    background-color: rgb(116, 161, 200);
+    border-bottom: 1px solid powderblue;
+    justify-items: center;
+    }
+
+nav {
+     margin-right: 50px;
+ }
+
+nav li {
+        text-transform: uppercase;
+    }
+
+.nav-item {
+        padding: 20px;
+    }
+
+.header {
+    font-size: 30px;
+    padding-left: 20px;
+    }
+
+.dropdown-menu,
+.dropdown-item {
+    background-color: rgb(121, 178, 228);
+    }
+
+/* main basics */
+body {
+    background: url(../images/capitol_bg.jpg) no-repeat center fixed;
+    background-color: hsla(0,0%,100%,0.95);
+    background-blend-mode: overlay;
+    background-size: cover;
+}
+
+main {
+        padding: 140px 100px 140px 100px;
+}
+
+/*hx styling*/
+
+h1{
+    text-align: center;
+    padding: 10px;
+    font-style: italic;
+}
+
+/* hidden text */
+.btn {
+    padding: 10px;
+    border: rgb(116, 161, 200) 1px solid;
+}
+
+.btn-hid {
+    padding: 10px;
+    border: rgb(116, 161, 200) 1px solid;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#read-more {
+    display: none;
+}
+
+aside {
+    padding: 15px;
+    border: rgb(116, 161, 200) 1px solid;
+    border-radius: 10px;
+    margin-top: 15px;
+    background-color: rgba(116, 161, 200, 0.3);
+}
+
+/* selects*/
+th:hover {
+    cursor: pointer;
+}
+
+/*table*/
+
+table {
+    margin-top: 18px;
+}
+
+th {
+    cursor: pointer;
+}
+
+td a {
+    color: #000000;
+}
+
+table, th, td{
+    border: 1px rgb(116, 161, 200) solid;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background: rgb(116, 161, 200)
+};
+
+tr:nth-child(odd) {
+    background: #FFF
+}
+
+/*wait showing table*/
+/*footer*/
+
+footer {
+    padding: 10px 0;
+    z-index: 1;
+    background-color: rgb(116, 161, 200);
+    border-top: 1px solid powderblue;
+}

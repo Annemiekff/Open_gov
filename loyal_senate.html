@@ -1,0 +1,153 @@
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <title>USA Open Gov</title>
+    <!-- bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <!-- needed for bootstrap. Belangrijk eerst jQuery, dan Popper.js en dan Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous" defer></script>
+
+    <!-- link main JS to html -->
+    <!-- <script type="text/javascript" src="./resources/js/main.js" defer></script> -->
+    
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+
+    <!-- Vue-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+    <script type="text/javascript" src="./resources/js/att.js" defer></script>
+
+    <!-- css -->
+    <link href="resources/css/style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <!-- navigation-->
+        <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: rgb(116, 161, 200)">
+            <a class="navbar-brand">
+                <img src="./resources/images/US_Flag.png" height="90px">
+                <span class="header">USA Open Government</span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item my-auto"><a href="./index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item dropdown my-auto">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Congress 116
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./congr_senate.html">Senate 116<span class="sr-only">(current)</span></a>
+                            <a class="dropdown-item" href="./congr_house.html">House 116</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown my-auto">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Attendance
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./att_senate.html">Senate attendance</a>
+                            <a class="dropdown-item" href="./att_house.html">House attendance</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown my-auto">
+                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Loyalty
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item active" href="./loyal_senate.html">Senate loyalty</a>
+                            <a class="dropdown-item" href="./loyal_house.html">House loyalty</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main> 
+        <h1>Senate-Party Loyalty</h1>
+        <p>Those who consider themselves to be strong partisans, strong Democrats and strong Republicans respectively, tend to be the most faithful in voting for their party's nominee for office and legislation that backs their party's agenda</p>
+        <div id="appLa" class="container">
+            <section v-if="errored" class="row">
+                <p class="col-10">We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+            </section>
+            <section v-else> 
+                <div class="row justify-content-md-center">      
+                <table class="col-6">
+                    <thead>
+                        <th>Party</th>
+                        <th>Senators</th>
+                        <th>Voted with party</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Democrats</td>
+                            <td>{{ dRep }}</td>
+                            <td>{{ dVote }}%</td>
+                        </tr>
+                        <tr>
+                            <td>Republicans</td>
+                            <td>{{ rRep }}</td>
+                            <td>{{ rVote }}%</td>
+                        </tr>
+                        <tr>
+                            <td>Independent</td>
+                            <td>{{ iRep }}</td>
+                            <td>{{ iVote }}%</td>
+                        </tr>
+                        <tr>
+                            <td>Senate</td>
+                            <td>{{ tRep }}</td>
+                            <td>{{ tVote }}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div class="row justify-content-md-center"> 
+                <section class="col-6">
+                    <h3>The top 10% least loyal:</h3>
+                <table>
+                    <thead>
+                        <th width="30%" @click="sort('last_name')">Senator</th>
+                        <th width="30%" @click="sort('party_votes')">Party votes</th>
+                        <th width="30%" @click="sort('votes_with_party_pct')">% voted with party</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="member in swing">
+                            <td><a v-bind:href="member.url" target="new"  >{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</a></td>
+                            <td>{{ member.party_votes }}</td>
+                            <td>{{ member.votes_with_party_pct }}%</td>
+                        </tr>
+                    </tbody>
+                </table> 
+                </section>
+                <section class="col-6">
+                    <h3>The top 10% most loyal:</h3>      
+            <table>
+                <thead>
+                    <th width="30%" @click="sort2('last_name')">Senator</th>
+                    <th width="30%" @click="sort2('party_votes')">Party votes</th>
+                    <th width="30%" @click="sort2('votes_with_party_pct')">% voted with party</th>
+                </thead>
+                <tbody>
+                    <tr v-for="member in loyal">
+                        <td><a v-bind:href="member.url" target="new"  >{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</a></td>
+                        <td>{{ member.party_votes }}</td>
+                        <td>{{ member.votes_with_party_pct }}%</td>
+                    </tr>
+                </tbody>
+            </table>
+            </section>
+        </div> <!-- ends row -->
+            </section>
+        </div> <!-- ends appla -->
+    </main>
+    <footer class="d-flex justify-content-around fixed-bottom">
+            <img src="./resources/images/Seal_US_Senate.png" height="100px">
+            <img src="./resources/images/Seal_US_House.png" height="100px">
+    </footer>
+</body>
+</html>
