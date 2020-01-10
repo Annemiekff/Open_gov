@@ -15,7 +15,7 @@ const app = new Vue({
     }
   },
   async mounted() {
-    try{      //try get to make error in loading visible
+    try{      //try catch to make error in loading data visible
       response = await axios.get(url, {headers: {"X-Api-Key": apiKey}})       //get data async
       .then((response) => {
         response.data.results[0].members.forEach((item) => {
@@ -32,6 +32,7 @@ const app = new Vue({
 
 computed: {
   resultQuery(){
+    //live search results
     if(this.searchQuery){
       searchresult = this.members.filter((item)=>{
       return this.searchQuery.toLowerCase().split(' ').every(v => item.first_name.toLowerCase().includes(v) ||  item.last_name.toLowerCase().includes(v))
