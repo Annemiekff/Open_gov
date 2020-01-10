@@ -1,5 +1,8 @@
 const apiKey = "cHWA0cyVrIeIZHFmZyrlp3UBNFO1aqLn7LsYLij2";
 const url = "https://api.propublica.org/congress/v1/116/house/members.json";
+setTimeout(function(){
+    document.getElementById("appLh").style.display = "block"; 
+   }, 1000);
 
 const app = new Vue({
     el: '#appLh',

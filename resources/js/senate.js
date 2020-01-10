@@ -1,5 +1,8 @@
 const apiKey = "cHWA0cyVrIeIZHFmZyrlp3UBNFO1aqLn7LsYLij2";
 const url = "https://api.propublica.org/congress/v1/116/senate/members.json";
+setTimeout(function(){
+  document.getElementById("app").style.display = "block"; 
+ }, 750);
 
 const app = new Vue({
   el: '#app',

@@ -120,6 +120,10 @@ tr:nth-child(odd) {
 }
 
 /*wait showing table*/
+#app, #appHouse, #appLa, #appLh{
+    display: none;
+}
+
 /*footer*/
 
 footer {
