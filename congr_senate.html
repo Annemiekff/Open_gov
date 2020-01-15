@@ -2,7 +2,6 @@
 <head>
     <meta charset="UTF-8">
     <title>USA Open Gov</title>
-
     <!-- bootstrap -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -179,30 +178,3 @@
     </footer>
 </body>
 </html>
-
-
-<!-- basics working table with search and sort name button
-    
-                <table>
-                    <thead>
-                        <th width=12% @click="sort('last_name')">Senator</th>
-                        <th width=12% @click="sort('party')">Party</th>
-                        <th width=12% @click="sort('state')">State</th>
-                        <th width=12% @click="sort('seniority')">Seniority</th>
-                        <th width=12% @click="sort('votes_with_party_pct')">Votes with party</th>
-                        <th width=12% @click="sort('votes_against_party_pct')">Votes against party</th>
-                    </thead>
-                    <tbody>
-                        <tr v-for="member in resultQuery">
-                            <td><a v-bind:href="member.url" target="new"  >{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</a></td>
-                            <td v-if="member.party === 'R'">Republican</td>
-                            <td v-else-if="member.party === 'D'">Democrat</td>
-                            <td v-else-if="member.party === 'ID'">Independent</td>
-                            <td v-else>Other</td>
-                            <td>{{ member.state }}</td>
-                            <td>{{ member.seniority }}</td>
-                            <td>{{ member.votes_with_party_pct }}%</td>
-                            <td>{{ member.votes_against_party_pct }}%</td>
-                        </tr>
-                    </tbody>
-                </table> -->

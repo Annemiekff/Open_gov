@@ -81,8 +81,8 @@
                 <table class="col-6">
                     <thead>
                         <th>Party</th>
-                        <th>Representatives</th width="10%">
-                        <th>Voted with party</th width="10%">
+                        <th>Representatives</th>
+                        <th>Voted with party</th>
                     </thead>
                     <tbody>
                         <tr>
@@ -115,8 +115,8 @@
                 <table>
                     <thead>
                         <th width="40%" @click="sort('last_name')">Representative</th>
-                        <th width="20%" @click="sort('missed_votes')">Missed votes</th width="10%">
-                        <th width="30%" @click="sort('missed_votes_pct')">% missed votes</th width="10%">
+                        <th width="20%" @click="sort('missed_votes')">Missed votes</th>
+                        <th width="30%" @click="sort('missed_votes_pct')">% missed votes</th>
                     </thead>
                     <tbody>
                         <tr v-for="member in losers">
@@ -132,8 +132,8 @@
             <table>
                 <thead>
                     <th width="40%" @click="sort2('last_name')">Representative</th>
-                    <th width="20%" @click="sort2('missed_votes')">Missed votes</th width="10%">
-                    <th width="30%" @click="sort2('missed_votes_pct')">% missed votes</th width="10%">
+                    <th width="20%" @click="sort2('missed_votes')">Missed votes</th>
+                    <th width="30%" @click="sort2('missed_votes_pct')">% missed votes</th>
                 </thead>
                 <tbody>
                     <tr v-for="member in winwin">

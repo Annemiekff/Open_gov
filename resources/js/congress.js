@@ -1,8 +1,5 @@
 const apiKey = "cHWA0cyVrIeIZHFmZyrlp3UBNFO1aqLn7LsYLij2";
 let url = "";
-setTimeout(function(){
-  document.getElementById("app").style.display = "block"; 
- }, 1500);
  
 let urlfetch = () => {
   let filename = location.href.split("/").slice(-1);
@@ -24,10 +21,10 @@ const app = new Vue({
       errored: false,
       currentSort:'last_name',
       currentSortDir:'asc',
-      checked: ["D", "R", "ID", "I"],
-      state: '',
       currentSort2: 'last_name',
       currentSortDir2: 'asc',
+      checked: ["D", "R", "ID", "I"],
+      state: '',
       dRep: 0, rRep: 0, tRep: 0, iRep: 0,
       dVoteT: 0, rVoteT: 0, tVoteT: 0, iVoteT: 0,
       dVote: 0, rVote: 0, tVote: 0, iVote: 0,
@@ -53,7 +50,6 @@ const app = new Vue({
             if (item.party === "D") {
                 this.dRep += 1
                 this.dVoteT += item.votes_with_party_pct
-
             }
 
             else if (item.party === "R") {
@@ -87,6 +83,7 @@ const app = new Vue({
   },
 
 computed: {
+    //-----------------------------MAIN TABLE------------------------------------
   resultQuery(){
     //live search results
     if(this.searchQuery){
@@ -115,6 +112,7 @@ computed: {
 
   // Sort the remaining values 
     return stateresult.sort((a,b) => {
+    document.getElementById("app").style.display = "block" // show the tables after everything is done
     let modifier = 1;
     if(this.currentSortDir === 'desc') modifier = -1;
     if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
@@ -123,7 +121,7 @@ computed: {
       });
     },
 
-    //Used for Attendence
+    //-----------------------------ATTENDANCE TABLES------------------------------------
   losers() {
     //sort members for attendance and slice bottom 10%
     this.activeMember = this.members.sort((a, b) => b.missed_votes_pct - a.missed_votes_pct)
@@ -143,6 +141,7 @@ computed: {
     winners = this.activeMember.slice((this.tRep - Math.round(this.tRep / 10)), this.tRep)
     //   Sort the remaining values 
     return winners.sort((a, b) => {
+      document.getElementById("app").style.display = "block" // show the tables after everything is done
       let modifier = 1;
       if (this.currentSortDir2 === 'desc') modifier = -1;
       if (a[this.currentSort2] < b[this.currentSort2]) return -1 * modifier;
@@ -151,7 +150,7 @@ computed: {
     })
   },
 
-  //Used for Loyalty
+  //-----------------------------LOYALTY TABLES------------------------------------
   swing() {
   //sort members for both functions and slice for lowest 10% loyalty
     this.activeMember = this.members.sort((a, b) => a.votes_with_party_pct - b.votes_with_party_pct)
@@ -171,6 +170,7 @@ computed: {
     loyalists = this.activeMember.slice((this.tRep - Math.round(this.tRep / 10)), this.tRep)
     //   Sort the remaining values 
     return loyalists.sort((a, b) => {
+      document.getElementById("app").style.display = "block" // show the tables after everything is done
       let modifier = 1;
       if (this.currentSortDir2 === 'desc') modifier = -1;
       if (a[this.currentSort2] < b[this.currentSort2]) return -1 * modifier;

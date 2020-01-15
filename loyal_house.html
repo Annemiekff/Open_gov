@@ -78,8 +78,8 @@
                 <table class="col-6">
                     <thead>
                         <th>Party</th>
-                        <th>Senators</th width="10%">
-                        <th>Voted with party</th width="10%">
+                        <th>Senators</th>
+                        <th>Voted with party</th>
                     </thead>
                     <tbody>
                         <tr>
@@ -112,8 +112,8 @@
                 <table>
                     <thead>
                         <th width="40%" @click="sort('last_name')">Senator</th>
-                        <th width="20%" @click="sort('party_votes')">Party votes</th width="10%">
-                        <th width="30%" @click="sort('votes_with_party_pct')">% voted with party</th width="10%">
+                        <th width="20%" @click="sort('party_votes')">Party votes</th>
+                        <th width="30%" @click="sort('votes_with_party_pct')">% voted with party</th>
                     </thead>
                     <tbody>
                         <tr v-for="member in swing">
