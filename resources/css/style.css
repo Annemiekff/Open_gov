@@ -120,7 +120,7 @@ tr:nth-child(odd) {
 }
 
 /*wait showing table*/
-#app, #appHouse, #appLa, #appLh{
+#app,#appLA, #appLh{
     display: none;
 }
 

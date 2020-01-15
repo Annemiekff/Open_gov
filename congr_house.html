@@ -1,5 +1,4 @@
 <!doctype html>
-
 <head>
     <meta charset="UTF-8">
     <title>USA Open Gov</title>
@@ -27,12 +26,11 @@
 
     <!-- Vue-->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
-    <script type="text/javascript" src="./resources/js/house.js" defer></script>
+    <script type="text/javascript" src="./resources/js/congress.js" defer></script>
 
     <!-- css -->
     <link href="resources/css/style.css" type="text/css" rel="stylesheet">
 </head>
-
 <body>
     <header>
         <!-- navigation-->
@@ -91,7 +89,7 @@
         <p>Each U.S. state is represented in the House in proportion to its population as measured in the census, but
             every state is entitled to at least one representative.</p>
 
-        <div id="appHouse" class="container">
+        <div id="app" class="container">
             <section v-if="errored">
                 <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
             </section>
