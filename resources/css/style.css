@@ -96,6 +96,10 @@ select {
     height: 45px
 }
 
+label {
+    padding-right: 7px;
+}
+
 #check{
     margin-top: 7px;
 }
