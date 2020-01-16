@@ -92,6 +92,14 @@ th:hover {
     cursor: pointer;
 }
 
+select {
+    height: 45px
+}
+
+#check{
+    margin-top: 7px;
+}
+
 /*table*/
 
 table {
