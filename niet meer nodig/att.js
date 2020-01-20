@@ -1,4 +1,5 @@
 const apiKey = "cHWA0cyVrIeIZHFmZyrlp3UBNFO1aqLn7LsYLij2";
+
 let url = "";
 setTimeout(function(){
     document.getElementById("appLA").style.display = "block"; 
